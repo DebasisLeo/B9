@@ -2,10 +2,12 @@ let ar=[];
 let c=1;
 function clickBtn(event)
 {
-    if (ar.length<=3) {
+    const seat = event.innerText;
+    const index = ar.indexOf(seat);
+    if (ar.length<=3 && index === -1 ) {
         event.classList.add('bg-red-300')
         event.classList.add('text-white')
-       
+      
         ar.push(event.innerText);
         document.getElementById('zero').innerText=ar.length;
         document.getElementById('four').innerText=40-ar.length;
@@ -27,10 +29,24 @@ function clickBtn(event)
         
      }
     }
+    else if(index !== -1)
+    {ar.pop(event.innerText);
+        event.classList.remove('bg-red-300')
+        event.classList.remove('text-white')
+        document.getElementById('four').innerText=40-ar.length;
+        deleteLastChild()
+       
+    }
     else
     {
-        return alert('maximum seat booked');
+        return alert("maximum seat booked")
     }
     
  
+}
+function deleteLastChild() {
+    let ul = document.getElementById('u-1');
+    if (ul.lastElementChild) {
+        ul.removeChild(ul.lastElementChild);
+    }
 }
